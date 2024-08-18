@@ -1,0 +1,15 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: 'Azure Pipelines'  # 使用 Azure DevOps 提供的托管代理池
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'GitHubConnection'  # 替换为您的服务连接名称
+    scriptType: 'bash'
+    scriptPath: 'deploy.sh'
+    arguments: '--image acr43221913.azurecr.io/aci-aspnetapp:latest --app-name aci-aspnetapp --resource-group RG1'
